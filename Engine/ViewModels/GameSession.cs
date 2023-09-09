@@ -11,9 +11,9 @@ public class GameSession
             Name = "Alice",
             Gold = 1000000,
             CharacterClass = "Fighter",
-            Level = 3,
-            HP = 80,
-            XP = 200
+            Level = 1,
+            Life = 80,
+            Experience = 0
         };
     }
 }
