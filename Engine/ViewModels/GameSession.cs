@@ -5,7 +5,7 @@ using Engine.Factories;
 
 namespace Engine.ViewModels;
 
-public class GameSession : INotifyPropertyChanged
+public class GameSession : BaseNotificationClass
 {
     private Location _currentLocation;
     
@@ -47,30 +47,34 @@ public class GameSession : INotifyPropertyChanged
             Experience = 0
         };
 
-        WorldFactory factory = new WorldFactory();
-        CurrentWorld = factory.CreateWorld();
+        
+        CurrentWorld = WorldFactory.CreateWorld();
 
         CurrentLocation = CurrentWorld.LocationAt(0, -1);
     }
 
+    
+    // Nullable warning suppressed in all the Move methods as the if-statement prevents it from setting a null value
     public void MoveNorth() {
-        CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1);
+        if (HasLocationToNorth) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1)!;
+        }
     }
 
     public void MoveSouth() {
-        CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1);    }
+        if (HasLocationToSouth) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1)!;    }
+    }
 
     public void MoveEast() {
-        CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate);
+        if (HasLocationToSouth) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate)!;
+        }
     }
 
     public void MoveWest() {
-        CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate);
-    }
-    
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        if (HasLocationToSouth) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate)!;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Engine.Models;
 
 
-public class Player : INotifyPropertyChanged
+public class Player : BaseNotificationClass
 {
     private string _name;
     private string _characterClass;
@@ -59,11 +59,5 @@ public class Player : INotifyPropertyChanged
             _gold = value;
             OnPropertyChanged(nameof(Gold));
         }
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
