@@ -63,7 +63,8 @@ public class Player : BaseNotificationClass
     }
     public ObservableCollection<GameItem> Inventory { get; set; }
 
-    public Player() {
+    public Player() 
+    {
         Inventory = new ObservableCollection<GameItem>();
     }
     
