@@ -57,24 +57,25 @@ public class GameSession : BaseNotificationClass
     // Nullable warning suppressed in all the Move methods as the if-statement prevents it from setting a null value
     public void MoveNorth() {
         if (HasLocationToNorth) {
-            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1)!;
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1);
         }
     }
 
     public void MoveSouth() {
         if (HasLocationToSouth) {
-            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1)!;    }
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1);
+        }
     }
 
     public void MoveEast() {
-        if (HasLocationToSouth) {
-            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate)!;
+        if (HasLocationToEast) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate);
         }
     }
 
     public void MoveWest() {
-        if (HasLocationToSouth) {
-            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate)!;
+        if (HasLocationToWest) {
+            CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate);
         }
     }
 }
