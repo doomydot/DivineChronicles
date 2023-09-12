@@ -10,6 +10,8 @@ internal static class WorldFactory
         newWorld.AddLocation(-2, -1, "Farmer's Field",
             "There are rows of corn growing here, with giant rats running about.",
             "/Engine;component/Images/Locations/FarmFields.png");
+
+        newWorld.LocationAt(-2, -1).AddMonster(2, 100);
         
         newWorld.AddLocation(-1, -1, "Farmer's House",
             "This is the house of your neighbour, Farmer Ted.",
@@ -34,14 +36,20 @@ internal static class WorldFactory
         newWorld.AddLocation(2, 0, "Spider Forest",
             "It's all covered in spider webs, every tree. Damn.",
             "/Engine;component/Images/Locations/SpiderForest.png");
+
+        newWorld.LocationAt(2, 0).AddMonster(3, 100);
         
         newWorld.AddLocation(0, 1, "Herbalist's Hut",
             "You see a tiny hut surrounded by potted herbs and wildflowers drying from the roof.",
             "/Engine;component/Images/Locations/HerbalistsHut.png");
         
+        newWorld.LocationAt(0,1).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(1));
+        
         newWorld.AddLocation(0, 2, "Herbalist's Garden",
             "There's so many plants here, I hope there aren't any snakes.",
             "/Engine;component/Images/Locations/HerbalistsGarden.png");
+        
+        newWorld.LocationAt(0,2).AddMonster(1,100);
         
         return newWorld;
     }

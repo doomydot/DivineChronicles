@@ -8,8 +8,11 @@ namespace Engine.ViewModels;
 public class GameSession : BaseNotificationClass
 {
     private Location _currentLocation;
+    private Monster? _currentMonster;
     
     public Player CurrentPlayer { get; set; }
+
+    public World CurrentWorld { get; set; }
 
     public Location CurrentLocation {
         get => _currentLocation;
@@ -21,10 +24,25 @@ public class GameSession : BaseNotificationClass
             OnPropertyChanged(nameof(HasLocationToSouth));
             OnPropertyChanged(nameof(HasLocationToEast));
             OnPropertyChanged(nameof(HasLocationToWest));
+
+            GivePlayerQuestsAtLocation();
+            GetMonsterAtLocation();
         }
     }
-    public World CurrentWorld { get; set; }
 
+    public Monster? CurrentMonster {
+
+        get => _currentMonster;
+        set {
+            _currentMonster = value;
+
+            OnPropertyChanged(nameof(CurrentMonster));
+            OnPropertyChanged(nameof(HasMonster));
+        }
+    }
+
+    public bool HasMonster => CurrentMonster != null;
+    
     public bool HasLocationToNorth => 
         CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
 
@@ -77,5 +95,18 @@ public class GameSession : BaseNotificationClass
         if (HasLocationToWest) {
             CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate);
         }
+    }
+
+    private void GivePlayerQuestsAtLocation() {
+        foreach (var quest in CurrentLocation.QuestsAvailableHere) {
+            // Checks Players Quests for Current Locations quest.ID, adds it if not found
+            if (CurrentPlayer.Quests.All(q => q.PlayerQuest.ID != quest.ID)) {
+                CurrentPlayer.Quests.Add(new QuestStatus(quest));
+            }
+        }
+    }
+
+    private void GetMonsterAtLocation() {
+        CurrentMonster = CurrentLocation.GetMonster();
     }
 }

@@ -14,6 +14,10 @@ public static class ItemFactory
 
         _standardGameItems.Add(new GameItem(9001, "Snake Fang", 1));
         _standardGameItems.Add(new GameItem(9002, "Snakeskin", 2));
+        _standardGameItems.Add(new GameItem(9003, "Rat Tail", 1));
+        _standardGameItems.Add(new GameItem(9004, "Rat Fur", 2));
+        _standardGameItems.Add(new GameItem(9005, "Spider Fang", 1));
+        _standardGameItems.Add(new GameItem(9006, "Spider Silk", 2));
     }
 
     public static GameItem CreateGameItem(int itemTypeID) {
